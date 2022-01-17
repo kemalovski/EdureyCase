@@ -13,10 +13,11 @@
             <BreezeLabel for="email" value="Email" />
             <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autocomplete="username" />
         </div>
+    
         <div class="mt-4">
             <BreezeLabel for="phone" value="Phone" />
-            <BreezeInput id="phone" type="tel" class="mt-1 block w-full" v-model="form.phone" required autocomplete="phone" />
-        </div>
+       <input class="w-full border-gray-300 border-2 h-11 rounded-md px-1 py-2" v-model="form.phone" id="phone" v-maska="['+90 (###) ###-##-##', '+90 (###) ###-##-##']" ref="input">
+       </div>
         <!--
         <div class="mt-4">
             <BreezeLabel for="phone" value="phone" />
@@ -52,10 +53,11 @@ import BreezeInput from '@/Components/Input.vue'
 import BreezeLabel from '@/Components/Label.vue'
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue'
 import { Head, Link } from '@inertiajs/inertia-vue3';
+import { maska } from 'maska';
 
 export default {
     layout: BreezeGuestLayout,
-
+    directives: { maska },
     components: {
         BreezeButton,
         BreezeInput,
@@ -79,6 +81,9 @@ export default {
     },
 
     methods: {
+        focus() {
+            this.$refs.input.focus()
+        },
         submit() {
             this.form.post(this.route('register'), {
                 onFinish: () => this.form.reset('password', 'password_confirmation'),
