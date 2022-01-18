@@ -1,12 +1,14 @@
 <template>
     <Head title="Log in" />
-
+    
+        {{ $page.props.flash.message }}
+    
     <BreezeValidationErrors class="mb-4" />
-
+    
     <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
         {{ status }}
     </div>
-
+        {{ messages }}
     <form @submit.prevent="submit">
         <div>
             <BreezeLabel for="email" value="Email" />
@@ -69,11 +71,18 @@ export default {
             form: this.$inertia.form({
                 email: '',
                 password: '',
-                remember: false
+                remember: false,
+                messages: '',
+
             })
         }
     },
+    watch: {
+        '$page.props.flash.message': function (newValue) {
+            this.messages = newValue;
 
+        }
+    },
     methods: {
         submit() {
             this.form.post(this.route('login'), {

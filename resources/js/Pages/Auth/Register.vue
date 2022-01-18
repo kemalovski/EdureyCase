@@ -18,17 +18,10 @@
             <BreezeLabel for="phone" value="Phone" />
        <input class="w-full border-gray-300 border-2 h-11 rounded-md px-1 py-2" v-model="form.phone" id="phone" v-maska="['+90 (###) ###-##-##', '+90 (###) ###-##-##']" ref="input">
        </div>
-        <!--
-        <div class="mt-4">
-            <BreezeLabel for="phone" value="phone" />
-            <BreezeInput id="phone" type="phone" class="mt-1 block w-full" v-model="form.phone" required autocomplete="phone" />
-        </div>
-        -->
         <div class="mt-4">
             <BreezeLabel for="password" value="Password" />
             <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
         </div>
-
         <div class="mt-4">
             <BreezeLabel for="password_confirmation" value="Confirm Password" />
             <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />

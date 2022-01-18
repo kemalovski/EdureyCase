@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Admin\AdminAuth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+/* ADMİN */
+Route::get('/admin',[AdminAuth::class,'show'])->name('adminlogin');
+Route::post('/admin-login',[AdminAuth::class,'login']);
 
 require __DIR__.'/auth.php';
