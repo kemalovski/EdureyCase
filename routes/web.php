@@ -31,13 +31,18 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-/* ADMİN */
+/*Case 2  ADMİN */
 Route::get('/admin',[AdminAuth::class,'show'])->name('adminlogin');
 Route::post('/admin',[AdminAuth::class,'login']);
 Route::group(['middleware' => 'auth:admin'],function (){
 Route::post('/admin-confirm',[ConfirmationUserController::class,'confirm']);
 Route::get('/admin-uncorfirmed',[ShowConfirmationUserController::class,'show'])->name('uncorfirmed');
 Route::get('/admin-logout',[AdminAuth::class,'logout']);
+});
+
+/*Case 1 Web Page */
+Route::get('/case1',function (){
+    return Inertia::render('Case1/case1');
 });
 
 require __DIR__.'/auth.php';
