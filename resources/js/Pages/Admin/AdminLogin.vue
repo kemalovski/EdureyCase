@@ -16,9 +16,7 @@
                     </div>
                     <div class="mt-4 flex justify-end">
                         <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Giriş</button>
-
                     </div>
-
                 </form>
 
             </div>
@@ -47,7 +45,7 @@ export default ({
                 password: this.form.password,
 
             }
-            Inertia.post('/admin-login',data);
+            Inertia.post('/admin',data);
         }
 
     }

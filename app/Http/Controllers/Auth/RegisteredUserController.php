@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use App\Http\Controllers\User\UserController;
 use Inertia\Inertia;
 
 class RegisteredUserController extends Controller
@@ -53,7 +55,10 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        if(Auth::user()->status == 1){
+            Auth::logout();
+            return Redirect::route('login')->with('message','Üyeliğiniz henüz onaylanmadı.');
+        }
         return redirect(RouteServiceProvider::HOME);
     }
 }

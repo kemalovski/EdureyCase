@@ -4,7 +4,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Admin\AdminAuth;
-
+use App\Http\Controllers\Admin\Confirmation\ConfirmationUserController;
+use App\Http\Controllers\Admin\Confirmation\ShowConfirmationUserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,11 @@ Route::get('/dashboard', function () {
 
 /* ADMİN */
 Route::get('/admin',[AdminAuth::class,'show'])->name('adminlogin');
-Route::post('/admin-login',[AdminAuth::class,'login']);
+Route::post('/admin',[AdminAuth::class,'login']);
+Route::group(['middleware' => 'auth:admin'],function (){
+Route::post('/admin-confirm',[ConfirmationUserController::class,'confirm']);
+Route::get('/admin-uncorfirmed',[ShowConfirmationUserController::class,'show'])->name('uncorfirmed');
+Route::get('/admin-logout',[AdminAuth::class,'logout']);
+});
 
 require __DIR__.'/auth.php';

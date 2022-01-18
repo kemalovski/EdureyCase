@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\User\UserController;
+use App\Models\User;
 use Inertia\Inertia;
 
 class AuthenticatedSessionController extends Controller
@@ -34,12 +36,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        
         $request->authenticate();
-
         $request->session()->regenerate();
-        if(Auth::user()->status == 1){
+         if(Auth::user()->status == 1){
             Auth::logout();
-            return Redirect::back()->with('message','Üyeliğiniz henüz onaylanmadı.');
+            return Redirect::route('login')->with('message','Üyeliğiniz henüz onaylanmadı.');
         }
         return redirect()->intended(RouteServiceProvider::HOME);
     }
